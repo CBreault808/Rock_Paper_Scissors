@@ -86,17 +86,17 @@ while true; do
     elif [[ "$user_input" -eq 1 && "$comp_choice" -eq 3 ]]; then
         INSULT=${WIN_ROCK_INSULTS[$RANDOM % ${#WIN_ROCK_INSULTS[@]}]}
         echo "💥 ROCK CRUSHES SCISSORS!"
-        echo -e "${GREEN}🏆 YOU WIN!${NC}"
+        echo -e "${GREEN}🏆 YOU WIN! $INSULT${NC}"
         ((player_score++))
     elif [[ "$user_input" -eq 2 && "$comp_choice" -eq 1 ]]; then
         INSULT=${WIN_PAPER_INSULTS[$RANDOM % ${#WIN_PAPER_INSULTS[@]}]}
         echo "💥 PAPER COVERS ROCK!"
-        echo -e "${GREEN}🏆 YOU WIN!${NC}"
+        echo -e "${GREEN}🏆 YOU WIN! $INSULT${NC}"
         ((player_score++))
     elif [[ "$user_input" -eq 3 && "$comp_choice" -eq 2 ]]; then
         INSULT=${WIN_SCISSORS_INSULTS[$RANDOM % ${#WIN_SCISSORS_INSULTS[@]}]}
         echo "💥 SCISSORS CUTS PAPER!"
-        echo -e "${GREEN}🏆 YOU WIN!${NC}"
+        echo -e "${GREEN}🏆 YOU WIN! $INSULT${NC}"
         ((player_score++))
     else
         # Computer wins
