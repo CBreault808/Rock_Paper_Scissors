@@ -27,6 +27,10 @@ TIE_SCISSORS_INSULTS=("Scissor me timbers. Try something else." "Don't cross bla
 player_score=0
 computer_score=0
 
+# --- Initialize Stats ---
+total_games=0
+ties_count=0
+
 # --- Array to map numbers to choices/emojis ---
 choices=("" "🪨 Rock" "📄 Paper" "✂️ Scissors")
 
@@ -65,6 +69,8 @@ while true; do
 
     # Generate random computer choice (1 = Rock, 2 = Paper, 3 = Scissors)
     comp_choice=$(( (RANDOM % 3) + 1 ))
+    # Begins tracking total number of games
+    ((total_games++))
 
     # Display choices
     echo "You chose: ${choices[$user_input]}"
@@ -73,7 +79,7 @@ while true; do
 
     # Game logic
     if [ "$user_input" -eq "$comp_choice" ]; then
-        
+        ((ties_count++))
         # Handle Tie Insults
         case "$comp_choice" in
             1) TAUNT=${TIE_ROCK_INSULTS[$RANDOM % ${#TIE_ROCK_INSULTS[@]}]} ;;
@@ -138,4 +144,18 @@ echo ""
 echo "Final Score:"
 echo "🏆 You: $player_score"
 echo "💻 Computer: $computer_score"
+echo ""
+echo "--- Final Game Statistics ---"
+echo "Total Games Played: $total_games"
+echo "Wins: $player_score"
+echo "Losses: $computer_score"
+echo "Ties: $ties_count"
+
+# Calculate win percentage using awk which handles floating integers
+if [ "$total_games" -gt 0 ]; then
+    win_percentage=$(awk "BEGIN {print ($player_score / $total_games) * 100}")
+    printf "Win Percentage: %.2f%%\n" "$win_percentage"
+else
+    echo "Win Percentage: 0.00%"
+fi
 echo "========================================"
